@@ -1,0 +1,11 @@
+﻿body {
+
+}
+.panelHeader {
+    color: white;
+    background-color : dimgray;
+}
+.selectedPanelHeader {
+    color : red;
+    background-color : blue;
+}
