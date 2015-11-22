@@ -50,6 +50,36 @@
 
 
         </asp:UpdatePanel>
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+            <ContentTemplate>
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Код" DataSourceID="SqlDataSource2">
+                    <Columns>
+                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
+                        <asp:BoundField DataField="Код" HeaderText="Код" InsertVisible="False" ReadOnly="True" SortExpression="Код" />
+                        <asp:BoundField DataField="Country" HeaderText="Country" SortExpression="Country" />
+                        <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone" />
+                        <asp:BoundField DataField="Nname" HeaderText="Nname" SortExpression="Nname" />
+                    </Columns>
+                </asp:GridView>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:CustomerManagment %>" DeleteCommand="DELETE FROM [Customers] WHERE [Код] = ?" InsertCommand="INSERT INTO [Customers] ([Код], [Country], [Phone], [Nname]) VALUES (?, ?, ?, ?)" ProviderName="<%$ ConnectionStrings:CustomerManagment.ProviderName %>" SelectCommand="SELECT * FROM [Customers] ORDER BY [Nname]" UpdateCommand="UPDATE [Customers] SET [Country] = ?, [Phone] = ?, [Nname] = ? WHERE [Код] = ?">
+                    <DeleteParameters>
+                        <asp:Parameter Name="Код" Type="Int32" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="Код" Type="Int32" />
+                        <asp:Parameter Name="Country" Type="String" />
+                        <asp:Parameter Name="Phone" Type="String" />
+                        <asp:Parameter Name="Nname" Type="String" />
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="Country" Type="String" />
+                        <asp:Parameter Name="Phone" Type="String" />
+                        <asp:Parameter Name="Nname" Type="String" />
+                        <asp:Parameter Name="Код" Type="Int32" />
+                    </UpdateParameters>
+                </asp:SqlDataSource>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
 </body>
 </html>
