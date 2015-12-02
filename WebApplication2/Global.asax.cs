@@ -16,6 +16,12 @@ namespace WebApplication2
             // Код, выполняемый при запуске приложения
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Application["VizitorsCount"] = 0;
+        }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            this.Session.Timeout = 20;
         }
     }
 }

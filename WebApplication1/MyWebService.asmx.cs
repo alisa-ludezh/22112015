@@ -32,7 +32,7 @@ namespace WebApplication1
             return ((a+ b)/2M).ToString();
         }
         [WebMethod]
-        public string[] CustomerList(string CountryName)
+        public List<XNode[]> CustomerList(string CountryName)
         {
             /// sql-запрос:
             /// 
@@ -43,20 +43,43 @@ namespace WebApplication1
             //string sqlQuery = "SELECT * FROM Countries";
             //SqlCommand sqlComm = new SqlCommand(sqlQuery, con);
             //SqlDataReader reader = sqlComm.ExecuteReader();
-
+            
             /// LINQ-запрос
             XElement doc = XElement.Load(Server.MapPath("Countries.xml"));
             XElement doc2 = XElement.Load(Server.MapPath("Customers.xml"));
+            //var bb =
+            //    (from aa in doc2.Elements("Customers")
+            //    where aa.Element("Country").Value ==
+            //        ((from c in doc.Elements("Countries")
+            //         where String.Equals(CountryName, c.Element("CountryName").Value, StringComparison.OrdinalIgnoreCase) == true
+            //          select c.Element("ID").Value).FirstOrDefault())
+            //    select aa.Value).ToArray();
             var bb =
-                from aa in doc2.Elements("Customers")
-                where aa.Element("Country").Value ==
-                    ((from c in doc.Elements("Countries")
-                     where String.Equals(CountryName, c.Element("CountryName").Value, StringComparison.OrdinalIgnoreCase) == true
-                      select c.Element("ID").Value).FirstOrDefault())
-                select aa.Value;
-            string[] a = bb.ToArray();
+                (from aa in doc2.Elements("Customers")
+                 where aa.Element("Country").Value ==
+                     ((from c in doc.Elements("Countries")
+                       where String.Equals(CountryName, c.Element("CountryName").Value, StringComparison.OrdinalIgnoreCase) == true
+                       select c.Element("ID").Value).FirstOrDefault())
+                 select aa.Element("Nname").Value).ToArray();
+            //var ccc =
+            //    from aln in ((from aa in doc2.Elements("Customers")
+            //    where aa.Element("Country").Value ==
+            //     ((from c in doc.Elements("Countries")
+            //       where String.Equals(CountryName, c.Element("CountryName").Value, StringComparison.OrdinalIgnoreCase) == true
+            //       select c.Element("ID").Value).FirstOrDefault())
+            //     select aa.Nodes()).ToArray())
+            //     select aln["Name"];
+
+            //var bbb =
+            //    (from aa in doc2.("Customers") select aa).ToArray();
+            //where aa.Element("Country").Value == "34643-4636-37"
+
+            var fin = (from aa in doc2.Elements("Customers") select aa.Nodes().ToArray()).ToList();
+
+            string[] a = bb;
+            //string[] ab = bb.ToArray();
             //con.Close();
-            return a;
+            return fin;
         }
     
     }
