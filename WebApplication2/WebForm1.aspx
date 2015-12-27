@@ -31,6 +31,7 @@
         <ajaxToolkit:ColorPickerExtender ID="TextBox2_ColorPickerExtender" runat="server" BehaviorID="TextBox2_ColorPickerExtender" TargetControlID="TextBox2" SampleControlID="Textbox2" />
         <br />
         <asp:Button ID="Button3" CssClass="btn btn-success" runat="server" OnClick="Button3_Click" Text="Button" />
+        <asp:PlaceHolder runat="server" ID="PlaceHolder1"></asp:PlaceHolder>
     </form>
 </body>
 </html>

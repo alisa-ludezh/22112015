@@ -1,4 +1,4 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ViewSwitcher.ascx.cs" Inherits="WebApplication2.ViewSwitcher" %>
-<div id="viewSwitcher">
-    <%: CurrentView %> view | <a href="<%: SwitchUrl %>" data-ajax="false">Switch to <%: AlternateView %></a>
-</div>
+<asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="ObjectDataSource2" DataTextField="ColorStr">
+</asp:DropDownList>
+<asp:ObjectDataSource ID="ObjectDataSource2" runat="server" SelectMethod="TypesDicti" TypeName="WebApplication2.WebForm1"></asp:ObjectDataSource>

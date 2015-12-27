@@ -7,17 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication2
 {
+
+
     public partial class WebForm1 : System.Web.UI.Page
     {
-        struct DayTimeType
-        {
-            public string Name;
-            public string FullName;
-            public byte Code;
-            public string ColorStr;
-        };
 
-        
         public string xx;
         public MyService.MyWebService proxy;
 
@@ -30,14 +24,14 @@ namespace WebApplication2
             {
                 Application["VizitorsCount"] = (int)Application["VizitorsCount"] + 1;
             }
-
+            //PlaceHolder1.Controls.Add();
         }
 
         private void Proxy_HelloWorldAverageCompleted(object sender, MyService.HelloWorldAverageCompletedEventArgs e)
         {
             xx = e.Result;
             this.Response.SetCookie(
-                new HttpCookie("Name", xx.GetHashCode().ToString()) {Expires = DateTime.Now.AddHours(2) });
+                new HttpCookie("Name", xx.GetHashCode().ToString()) { Expires = DateTime.Now.AddHours(2) });
             ViewState["xx"] = xx;
             this.Label1.Text = xx;
         }
@@ -80,9 +74,9 @@ namespace WebApplication2
                 Cache["TypesDictionary"] = TypesDictionary;
                 // Алиса: ручная настройка:
                 // Cache.Add("TypesDictionary", TypesDictionary,
-                            //null, DateTime.Now.AddHours(2),
-                            //TimeSpan.FromMinutes(30), System.Web.Caching.CacheItemPriority.Normal,
-                            //null);
+                //null, DateTime.Now.AddHours(2),
+                //TimeSpan.FromMinutes(30), System.Web.Caching.CacheItemPriority.Normal,
+                //null);
             }
         }
 
@@ -110,12 +104,12 @@ namespace WebApplication2
                 string ssss = (Convert.ToInt32(this.Request.Cookies["Name"].Value)).ToString();
                 string sss = ViewState["xx"].ToString();
             }
-                if (!String.IsNullOrWhiteSpace(TextBox2.Text))
-                {
-                    this.Session["UserBackColor"] = TextBox2.Text; // System.Drawing.Color.FromArgb(Convert.ToInt32(this.TextBox2.Text, 16));
-                    this.Button3.BackColor = System.Drawing.Color.FromArgb(Convert.ToInt32(this.Session["UserBackColor"].ToString(), 16));
-                    this.Header.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#" + this.Session["UserBackColor"].ToString());
-                }
+            if (!String.IsNullOrWhiteSpace(TextBox2.Text))
+            {
+                this.Session["UserBackColor"] = TextBox2.Text; // System.Drawing.Color.FromArgb(Convert.ToInt32(this.TextBox2.Text, 16));
+                this.Button3.BackColor = System.Drawing.Color.FromArgb(Convert.ToInt32(this.Session["UserBackColor"].ToString(), 16));
+                this.Header.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#" + this.Session["UserBackColor"].ToString());
+            }
         }
 
         protected void TextBox2_TextChanged(object sender, EventArgs e)
